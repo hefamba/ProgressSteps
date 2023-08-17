@@ -5,28 +5,36 @@ const circles = document.querySelectorAll('.circle');
 
 let activeCircle = 1;
 
-next.addEventListener('click', () => {
-    activeCircle++;
+const update = () => {
     circles.forEach((circle, idx) => {
         if (idx < activeCircle) {
             circle.classList.add('active');
         }
+        else {
+            circle.classList.remove('active');
+
+        }
     });
+};
 
-    if (activeCircle > circles.length)
 
+
+next.addEventListener('click', () => {
+    activeCircle++;
+    if (activeCircle > circles.length) {
+        activeCircle = circles.length;
+    }
+    update();
     console.log(activeCircle);
-
 });
 
 prev.addEventListener('click', () => {
     activeCircle--;
-    circles.forEach((circle, idx) => {
-        if (idx > activeCircle) {
-            circle.classList.remove('active');
-        }
 
-    });
+    if (activeCircle < 1) {
+        activeCircle = 1;
+    }
+    update();
     console.log(activeCircle);
 })
 
