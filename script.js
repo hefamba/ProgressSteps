@@ -3,6 +3,7 @@ const prev = document.getElementById('prev');
 const progress = document.getElementById('progress');
 const circles = document.querySelectorAll('.circle');
 
+
 let activeCircle = 1;
 
 const update = () => {
@@ -15,7 +16,24 @@ const update = () => {
 
         }
     });
+    const actives = document.querySelectorAll('.active');
+    progress.style.width = (actives.length - 1) / (circles.length - 1) * 100 + '%';
+    if (activeCircle === 1) {
+        prev.disabled = true;
+
+    }
+    else if (activeCircle === circles.length) {
+        next.disabled = true;
+    }
+    else {
+        prev.disabled = false;
+        next.disabled = false;
+
+    }
 };
+
+// every time the activeCircle idx change the progress will move with it.
+
 
 
 
@@ -25,7 +43,7 @@ next.addEventListener('click', () => {
         activeCircle = circles.length;
     }
     update();
-    console.log(activeCircle);
+
 });
 
 prev.addEventListener('click', () => {
@@ -35,8 +53,10 @@ prev.addEventListener('click', () => {
         activeCircle = 1;
     }
     update();
-    console.log(activeCircle);
+
 })
+
+
 
 
 
